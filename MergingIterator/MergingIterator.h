@@ -8,11 +8,13 @@ class MergingIterator
 {
 	
 public:
+	MergingIterator()
+	{
+		_eof == true;
+	}
 	explicit MergingIterator(std::initializer_list<std::pair<T,T>> list)
 	{
 		T minObj;
-
-		
 		bool isMinObjDefined = false;
 		size_t minObjIndex  = 0;
 		size_t index = 0;
@@ -36,6 +38,7 @@ public:
 		}
 		_currentIterator = minObj;
 		_currentIteratorIndex = minObjIndex;
+		_eof = false;
 	}
 
 	typename std::iterator_traits<T>::value_type operator* ()
@@ -46,7 +49,11 @@ public:
 
 	typename std::iterator_traits<T>::value_type operator++ ()
 	{
-		
+		if (_iterators.size()==0)
+		{
+			_eof = true;
+			return *_currentIterator;
+		}
 		_iterators.at(_currentIteratorIndex).first++;
 		T first = _iterators.at(_currentIteratorIndex).first;
 		T second = _iterators.at(_currentIteratorIndex).second;
@@ -85,11 +92,35 @@ public:
 		
 	}
 	
+	typename std::iterator_traits<T>::value_type operator++ (int unused)
+	{
+		T toReturn = _currentIterator;
+		this->operator++();
+		return *toReturn;
+	}
+	
+	inline bool eof() const
+	{
+		return _eof; 
+	}
+	
+	inline bool operator ==(const MergingIterator<T> second) const
+	{
+		return _eof && second.eof();
+	}
 
+	inline bool operator !=(const MergingIterator<T> second) const
+	{
+		return !(this->_eof && second.eof());
+	}
+
+	
+	MergingIterator<T>& operator&() = delete;
 private:
 		std::vector<std::pair<T,T>> _iterators;
 		T _currentIterator;
 		size_t _currentIteratorIndex;
+		bool _eof;
 };
 namespace std {
 	template <typename T>

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="MergingIterator.h" />
+    <ClInclude Include="MergingRange.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
