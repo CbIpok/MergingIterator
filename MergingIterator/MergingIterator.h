@@ -46,34 +46,43 @@ public:
 
 	typename std::iterator_traits<T>::value_type operator++ ()
 	{
-		std::cout << typeid(_currentIterator).name();
-		_currentIterator++;
+		
+		_iterators.at(_currentIteratorIndex).first++;
+		T first = _iterators.at(_currentIteratorIndex).first;
+		T second = _iterators.at(_currentIteratorIndex).second;
+		if (first == second)
+		{
+			_iterators.erase(_iterators.begin() + _currentIteratorIndex);
+		}
 		T minObj;
 		bool isMinObjDefined = false;
 		size_t minObjIndex = 0;
 		size_t index = 0;
-		for (auto& i : _iterators)
+		if (_iterators.size() != 0)
 		{
-			if (!isMinObjDefined)
+			for (auto& i : _iterators)
 			{
-				minObj = i.first;
-				isMinObjDefined = true;
-			}
-			else
-			{
-				if (*minObj > *(i.first))
+				if (!isMinObjDefined)
 				{
 					minObj = i.first;
-					minObjIndex = index;
+					isMinObjDefined = true;
 				}
-			}
-			_iterators.push_back(i);
-			index++;
-		}
-		_currentIterator = minObj;
-		_currentIteratorIndex = minObjIndex;
+				else
+				{
+					if (*minObj > *(i.first))
+					{
+						minObj = i.first;
+						minObjIndex = index;
+					}
+				}
 
-		return *_currentIterator;
+				index++;
+			}
+			_currentIterator = minObj;
+			_currentIteratorIndex = minObjIndex;
+		}
+			return *_currentIterator;
+		
 	}
 	
 
