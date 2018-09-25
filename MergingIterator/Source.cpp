@@ -12,8 +12,12 @@ int main()
 	
 	MergingRange < vector<int>::iterator> merRange({ { a.begin(),a.end() }, { b.begin(),b.end() }, { c.begin(),c.end() } });
 	
-	for (auto i : merRange)
+	auto merIterator = merRange.begin();
+	//&merIterator;
+
+	for (const auto &i : merRange)
 	{
+		
 		cout << i<<endl;
 	}
 

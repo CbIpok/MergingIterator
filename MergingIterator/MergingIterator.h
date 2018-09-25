@@ -8,10 +8,7 @@ class MergingIterator
 {
 	
 public:
-	MergingIterator()
-	{
-		_eof == true;
-	}
+	MergingIterator() = default;
 	explicit MergingIterator(std::initializer_list<std::pair<T,T>> list)
 	{
 		T minObj;
@@ -20,25 +17,28 @@ public:
 		size_t index = 0;
 		for (auto& i : list)
 		{
-			if (!isMinObjDefined)
+			if (i.first != i.second)
 			{
-				minObj = i.first;
-				isMinObjDefined = true;
-			}
-			else
-			{
-				if (*minObj > *(i.first)  )
+				if (!isMinObjDefined)
 				{
 					minObj = i.first;
-					minObjIndex = index;
+					isMinObjDefined = true;
 				}
+				else
+				{
+					if (*minObj > *(i.first))
+					{
+						minObj = i.first;
+						minObjIndex = index;
+					}
+				}
+				_iterators.push_back(i);
+				index++;
 			}
-			_iterators.push_back(i);
-			index++;
 		}
 		_currentIterator = minObj;
 		_currentIteratorIndex = minObjIndex;
-		_eof = false;
+		
 	}
 
 	typename std::iterator_traits<T>::value_type operator* ()
@@ -51,7 +51,6 @@ public:
 	{
 		if (_iterators.size()==0)
 		{
-			_eof = true;
 			return *_currentIterator;
 		}
 		_iterators.at(_currentIteratorIndex).first++;
@@ -101,26 +100,30 @@ public:
 	
 	inline bool eof() const
 	{
-		return _eof; 
+		return _iterators.size() == 0;
 	}
 	
-	inline bool operator ==(const MergingIterator<T> second) const
+	inline  bool operator ==(const MergingIterator<T> second) const
 	{
-		return _eof && second.eof();
+		return eof() && second.eof();
 	}
 
-	inline bool operator !=(const MergingIterator<T> second) const
+	inline  bool operator !=(const MergingIterator<T> second) const
 	{
-		return !(this->_eof && second.eof());
+		return !(eof()  && second.eof());
 	}
-
+	inline size_t getCountIterators() const
+	{
+		return _iterators.size();
+	}
 	
-	MergingIterator<T>& operator&() = delete;
+	MergingIterator<T>* operator&() = delete; //it is not possible to create a pointer to my iterator because I so wanted
+
 private:
 		std::vector<std::pair<T,T>> _iterators;
 		T _currentIterator;
 		size_t _currentIteratorIndex;
-		bool _eof;
+		
 };
 namespace std {
 	template <typename T>

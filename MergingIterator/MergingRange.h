@@ -24,6 +24,7 @@ public:
 	{
 		return MergingIterator<T>();
 	}
+
 private:
 	MergingIterator<T> _begin;
 };
