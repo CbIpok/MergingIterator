@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MergingIterator", "MergingIterator\MergingIterator.vcxproj", "{1DCC7667-4B9E-4B91-BF7C-B0783390C80D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MergingIteratorTest", "MergingIteratorTest\MergingIteratorTest.vcxproj", "{1C81DF06-B926-478B-85DA-B7DC38737CB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{1DCC7667-4B9E-4B91-BF7C-B0783390C80D}.Release|x64.Build.0 = Release|x64
 		{1DCC7667-4B9E-4B91-BF7C-B0783390C80D}.Release|x86.ActiveCfg = Release|Win32
 		{1DCC7667-4B9E-4B91-BF7C-B0783390C80D}.Release|x86.Build.0 = Release|Win32
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Debug|x64.ActiveCfg = Debug|x64
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Debug|x64.Build.0 = Debug|x64
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Debug|x86.ActiveCfg = Debug|Win32
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Debug|x86.Build.0 = Debug|Win32
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Release|x64.ActiveCfg = Release|x64
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Release|x64.Build.0 = Release|x64
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Release|x86.ActiveCfg = Release|Win32
+		{1C81DF06-B926-478B-85DA-B7DC38737CB1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

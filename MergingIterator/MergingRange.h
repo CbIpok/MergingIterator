@@ -15,6 +15,8 @@ public:
 		_begin = MergingIterator<T>(list);
 	}
 
+	
+
 	MergingIterator<T> begin()
 	{
 		return _begin;
